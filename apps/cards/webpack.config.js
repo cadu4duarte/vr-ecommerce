@@ -1,10 +1,14 @@
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { ModuleFederationPlugin } = require('webpack').container
-const path = require('path')
-
+const deps = require('./package.json').dependencies
 
 module.exports = {
   mode: 'development',
+
+  experiments: {
+    asyncStartup: true
+  },
 
   entry: path.resolve(__dirname, 'src/index.tsx'),
 
@@ -28,40 +32,51 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader'
+        ]
       }
     ]
   },
 
   plugins: [
-  new ModuleFederationPlugin({
-    name: 'cards',
-    filename: 'remoteEntry.js',
-    exposes: {
-      './Cards': './src/App'
-    },
-    shared: {
-  react: {
-    singleton: true,
-    requiredVersion: false
-  },
-  'react-dom': {
-    singleton: true,
-    requiredVersion: false
-  }
-}
-  }),
+    new ModuleFederationPlugin({
+      name: 'cards', // O nome deve ser 'cards' para o Shell encontrar
+      filename: 'remoteEntry.js',
+      exposes: {
+        // Isso permite que o Shell faça: import('cards/Cards')
+        './Cards': './src/App' 
+      },
+      shared: {
+        ...deps,
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        'react-dom': {
+          singleton: true,
+          requiredVersion: deps['react-dom'],
+        },
+        'react/jsx-runtime': {
+          singleton: true,
+          requiredVersion: deps.react,
+        }
+      }
+    }),
 
-  new HtmlWebpackPlugin({
-    template: path.resolve(__dirname, 'public/index.html')
-  })
-],
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public/index.html')
+    })
+  ],
 
   devServer: {
-    port: 3002,
+    port: 3002, // O Cards deve rodar na 3002
     open: true,
+    historyApiFallback: true,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*' // Necessário para o Shell conseguir baixar os arquivos
     }
   }
 }

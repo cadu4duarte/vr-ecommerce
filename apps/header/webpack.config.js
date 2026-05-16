@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { ModuleFederationPlugin } = require('webpack').container
+const deps = require('./package.json').dependencies
 
 module.exports = {
   mode: 'development',
@@ -42,23 +43,25 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'header',
+      name: 'header', // Nome que o Shell usará para identificar este remoto
       filename: 'remoteEntry.js',
       exposes: {
-        './Header': './src/App'
+        // Isso permite que o Shell faça: import('header/Header')
+        './Header': './src/App' 
       },
       shared: {
+        ...deps,
         react: {
           singleton: true,
-          requiredVersion: false
+          requiredVersion: deps.react,
         },
         'react-dom': {
           singleton: true,
-          requiredVersion: false
+          requiredVersion: deps['react-dom'],
         },
         'react/jsx-runtime': {
           singleton: true,
-          requiredVersion: false
+          requiredVersion: deps.react,
         }
       }
     }),
@@ -69,10 +72,11 @@ module.exports = {
   ],
 
   devServer: {
-    port: 3001,
+    port: 3001, // O Header deve rodar na porta 3001
     open: true,
+    historyApiFallback: true,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*' // Crucial para o Shell conseguir ler este micro-frontend
     }
   }
 }

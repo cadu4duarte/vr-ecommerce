@@ -1,10 +1,12 @@
-const { ModuleFederationPlugin } = require('webpack').container
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { ModuleFederationPlugin } = require('webpack').container
+const deps = require('./package.json').dependencies // Importa dependências para garantir versões iguais
 
 module.exports = {
   mode: 'development',
 
+  // Ajuda no carregamento inicial do Module Federation
   experiments: {
     asyncStartup: true
   },
@@ -43,22 +45,25 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'shell',
+      filename: 'remoteEntry.js',
+      // Aqui o Shell mapeia onde os micro-frontends estão rodando
       remotes: {
         header: 'header@http://localhost:3001/remoteEntry.js',
-        cards: 'cards@http://localhost:3002/remoteEntry.js'
+        cards: 'cards@http://localhost:3002/remoteEntry.js',
       },
       shared: {
+        ...deps,
         react: {
           singleton: true,
-          requiredVersion: false
+          requiredVersion: deps.react,
         },
         'react-dom': {
           singleton: true,
-          requiredVersion: false
+          requiredVersion: deps['react-dom'],
         },
         'react/jsx-runtime': {
           singleton: true,
-          requiredVersion: false
+          requiredVersion: deps.react,
         }
       }
     }),
@@ -69,8 +74,11 @@ module.exports = {
   ],
 
   devServer: {
-    port: 3000,
-    historyApiFallback: true,
-    open: true
+    port: 3000, // O Shell agora roda na 3000
+    open: true,
+    historyApiFallback: true, // Importante para rotas React funcionarem
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   }
 }
