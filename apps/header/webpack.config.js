@@ -5,6 +5,10 @@ const { ModuleFederationPlugin } = require('webpack').container
 module.exports = {
   mode: 'development',
 
+  experiments: {
+    asyncStartup: true
+  },
+
   entry: path.resolve(__dirname, 'src/index.tsx'),
 
   output: {
@@ -38,12 +42,26 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-  name: 'header',
-  filename: 'remoteEntry.js',
-  exposes: {
-    './Header': './src/App'
-  }
-}),
+      name: 'header',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Header': './src/App'
+      },
+      shared: {
+        react: {
+          singleton: true,
+          requiredVersion: false
+        },
+        'react-dom': {
+          singleton: true,
+          requiredVersion: false
+        },
+        'react/jsx-runtime': {
+          singleton: true,
+          requiredVersion: false
+        }
+      }
+    }),
 
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html')
@@ -51,10 +69,10 @@ module.exports = {
   ],
 
   devServer: {
-  port: 3001,
-  open: true,
-  headers: {
-    'Access-Control-Allow-Origin': '*'
+    port: 3001,
+    open: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   }
-}
 }

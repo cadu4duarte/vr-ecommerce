@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   mode: 'development',
 
+  experiments: {
+    asyncStartup: true
+  },
+
   entry: path.resolve(__dirname, 'src/index.tsx'),
 
   output: {
@@ -40,17 +44,20 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'shell',
       remotes: {
-        header: 'header@http://localhost:3001/remoteEntry.js'
+        header: 'header@http://localhost:3001/remoteEntry.js',
+        cards: 'cards@http://localhost:3002/remoteEntry.js'
       },
       shared: {
         react: {
           singleton: true,
-          eager: true,
           requiredVersion: false
         },
         'react-dom': {
           singleton: true,
-          eager: true,
+          requiredVersion: false
+        },
+        'react/jsx-runtime': {
+          singleton: true,
           requiredVersion: false
         }
       }

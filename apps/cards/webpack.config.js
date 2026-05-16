@@ -1,8 +1,11 @@
-const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { ModuleFederationPlugin } = require('webpack').container
+const path = require('path')
+
 
 module.exports = {
   mode: 'development',
+
   entry: path.resolve(__dirname, 'src/index.tsx'),
 
   output: {
@@ -31,13 +34,34 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'public/index.html')
-    })
-  ],
+  new ModuleFederationPlugin({
+    name: 'cards',
+    filename: 'remoteEntry.js',
+    exposes: {
+      './Cards': './src/App'
+    },
+    shared: {
+  react: {
+    singleton: true,
+    requiredVersion: false
+  },
+  'react-dom': {
+    singleton: true,
+    requiredVersion: false
+  }
+}
+  }),
+
+  new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, 'public/index.html')
+  })
+],
 
   devServer: {
     port: 3002,
-    open: true
+    open: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   }
 }
