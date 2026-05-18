@@ -39,12 +39,25 @@ O projeto foi estruturado como um **Monorepo**, dividido em 4 aplicações indep
     ```
     A aplicação principal abrirá automaticamente em: [http://localhost:3000](http://localhost:3000)
 
-## Testes
+## Testes Automatizados
 
-Para executar os testes unitários e de lógica de todos os micro-frontends:
-```bash
-npm test
-```
+O projeto utiliza **Vitest** e **React Testing Library** para garantir a integridade da lógica de negócio e da interface. A execução foi configurada via **NPM Workspaces** para permitir a validação de todos os micro-frontends de forma centralizada.
+
+### Como executar os testes:
+
+1. **Na raiz do projeto**, execute o comando abaixo:
+    ```bash
+    npm test
+    ```
+    > Este comando dispara as suítes de testes em todos os pacotes (`shell`, `header`, `cards`, `footer`) simultaneamente no modo CI (`--run`), garantindo que todas as unidades estejam funcionando conforme o esperado.
+
+### O que está sendo testado:
+
+- **Header:** Lógica de agrupamento de itens repetidos no carrinho (cálculo de quantidades e subtotais).
+- **Cards:** Fluxo assíncrono de consumo da API (Mock de Service) e renderização correta da vitrine.
+- **Shell:** Orquestração da montagem da aplicação e persistência de dados.
+
+  
 ## Funcionalidades Implementadas
 
 - [x] **Navegação e Detalhes (PDP):** Página de detalhes individual para cada produto utilizando rotas dinâmicas (`/product/:id`).
