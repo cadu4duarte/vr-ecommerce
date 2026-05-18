@@ -54,3 +54,17 @@ npm test
 - [x] **Feedback de UX:** Notificações tipo Toast animadas no canto da tela para confirmação de adição ao carrinho.
 - [x] **Design baseado no prototipo informado:** Interface fiel ao protótipo do Figma, com foco em responsividade
 - [x] **Arquitetura e Organização:** Estrutura de Monorepo com camada `shared` para centralização de Assets e Types (TypeScript).
+
+## Decisões Técnicas
+Módulo Compartilhado (Shared Layer): Implementei uma pasta shared na raiz para centralizar tipos e assets. Isso garante um "contrato de interface" único, evitando bugs de dessincronização entre as aplicações independentes.
+Navegação Dinâmica (Singleton Router): O react-router-dom foi configurado como Singleton via Module Federation. Isso permite que o Shell controle as rotas globais enquanto os remotos navegam internamente sem recarregar o navegador.
+Agrupamento de Itens: No desenvolvimento do carrinho, optei por uma lógica de normalização de dados para agrupar itens idênticos, melhorando a escaneabilidade do modal e a UX.
+
+### 🏗 Arquitetura
+```mermaid
+graph TD
+    Shell[Shell Host - Porta 3000] --> Header[Header Remote - Porta 3001]
+    Shell --> Cards[Cards/PDP Remote - Porta 3002]
+    Shell --> Footer[Footer Remote - Porta 3003]
+    Header -.-> Shared[Shared Layer - Assets/Types]
+    Cards -.-> Shared
