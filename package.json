@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "start": "concurrently \"npm run start --workspace=shell\" \"npm run start --workspace=header\" \"npm run start --workspace=cards\" \"npm run start --workspace=footer\"",
-    "test": "npm test --workspaces"
+    "test": "npm test --workspaces -- --run"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
