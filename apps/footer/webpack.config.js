@@ -30,15 +30,29 @@ module.exports = {
       },
       shared: {
         ...deps,
-        react: { singleton: true, requiredVersion: deps.react },
-        'react-dom': { singleton: true, requiredVersion: deps['react-dom'] }
+        react: { 
+          singleton: true, 
+          requiredVersion: deps.react 
+        },
+        'react-dom': { 
+          singleton: true, 
+          requiredVersion: deps['react-dom'] 
+        },
+        'react/jsx-runtime': { 
+          singleton: true, 
+          requiredVersion: deps.react 
+        },
+        'react-router-dom': {
+          singleton: true,
+          requiredVersion: deps['react-router-dom']
+        }
       }
     }),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public/index.html') })
   ],
   devServer: {
     port: 3003,
-    open: false,
+    open: true,
     headers: { 'Access-Control-Allow-Origin': '*' }
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
 import Header from './App'
 import { CartItem } from '../../shared/types/CartItem'
@@ -15,10 +16,12 @@ const mockItems: CartItem[] = []
 const root = createRoot(container)
 root.render(
   <React.StrictMode>
-    <Header
-      items={mockItems}
-      onRemove={() => {}}
-      onClear={() => {}}
-    />
+    <BrowserRouter>
+      <Header
+        items={mockItems}
+        onRemove={() => {}}
+        onClear={() => {}}
+      />
+    </BrowserRouter>
   </React.StrictMode>
 )
