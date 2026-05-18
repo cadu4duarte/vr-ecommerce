@@ -43,11 +43,12 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'cards', 
+      name: 'cards',
       filename: 'remoteEntry.js',
       exposes: {
-        
-        './Cards': './src/App' 
+
+        './Cards': './src/App',
+        './ProductDetail': './src/pages/ProductDetail'
       },
       shared: {
         ...deps,
@@ -62,6 +63,10 @@ module.exports = {
         'react/jsx-runtime': {
           singleton: true,
           requiredVersion: deps.react,
+        },
+        'react-router-dom': { 
+          singleton: true, 
+          requiredVersion: deps['react-router-dom'] 
         }
       }
     }),
@@ -72,11 +77,11 @@ module.exports = {
   ],
 
   devServer: {
-    port: 3002, 
+    port: 3002,
     open: true,
     historyApiFallback: true,
     headers: {
-      'Access-Control-Allow-Origin': '*' 
+      'Access-Control-Allow-Origin': '*'
     }
   }
 }

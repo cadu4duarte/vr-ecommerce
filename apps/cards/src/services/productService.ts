@@ -29,6 +29,7 @@ export const productService = {
 
   async getProductById(id: number): Promise<ProductDTO> {
     const response = await fetch(`${BASE_URL}/products/${id}`);
+    if (!response.ok) throw new Error('Produto não encontrado');
     return response.json();
   }
 };

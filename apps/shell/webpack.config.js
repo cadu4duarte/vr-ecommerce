@@ -63,6 +63,10 @@ module.exports = {
         'react/jsx-runtime': {
           singleton: true,
           requiredVersion: deps.react,
+        },
+        'react-router-dom': { 
+          singleton: true, 
+          requiredVersion: deps['react-router-dom'] 
         }
       }
     }),

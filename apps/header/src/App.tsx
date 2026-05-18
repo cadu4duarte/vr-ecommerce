@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { CartButton } from './components/CartButton'
 import { CartModal } from './components/CartModal'
 import { CartItem } from '../../shared/types/CartItem'
@@ -17,13 +18,13 @@ function Header({ items, onRemove, onClear }: HeaderProps) {
     <>
       <header className="bg-[#02D72F] px-8 h-16 flex justify-between items-center">
 
-        <button>
+        <Link to="/">
           <img 
             src={logo} 
             alt="VR Logo" 
             className="w-8 h-8" 
           />
-        </button>
+        </Link >
         <CartButton
           count={items.length}
           onClick={() => setIsOpen(true)}
