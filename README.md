@@ -45,17 +45,12 @@ Para executar os testes unitários e de lógica de todos os micro-frontends:
 ```bash
 npm test
 ```
-
 ## Funcionalidades Implementadas
 
-Listagem de produtos: Consumo real da API externa DummyJSON.
-
-Persistência de Dados: Carrinho salvo no LocalStorage para manter os itens após o refresh.
-
-Agrupamento de Itens: Produtos repetidos são somados no modal, exibindo a quantidade (ex: 2x).
-
-Feedback Visual: Notificação (Toast) animada no canto da tela ao adicionar produtos.
-
-Design Responsivo: Interface fiel ao protótipo do Figma, adaptável para mobile e desktop.
-
-Arquitetura Escalável: Uso de Monorepo com pasta shared para assets e tipagens globais.
+- [x] **Navegação e Detalhes (PDP):** Página de detalhes individual para cada produto utilizando rotas dinâmicas (`/product/:id`).
+- [x] **Listagem de produtos:** Consumo em tempo real da API externa DummyJSON com tratamento de estados.
+- [x] **Persistência de Dados:** Carrinho de compras gerenciado via Context API e persistido no LocalStorage.
+- [x] **Agrupamento Inteligente:** Itens repetidos são concatenados no modal, exibindo a quantidade (Ex: 2x) e o cálculo de subtotal.
+- [x] **Feedback de UX:** Notificações tipo Toast animadas no canto da tela para confirmação de adição ao carrinho.
+- [x] **Design baseado no prototipo informado:** Interface fiel ao protótipo do Figma, com foco em responsividade
+- [x] **Arquitetura e Organização:** Estrutura de Monorepo com camada `shared` para centralização de Assets e Types (TypeScript).
