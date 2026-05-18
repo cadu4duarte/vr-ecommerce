@@ -5,7 +5,10 @@
     "apps/*"
   ],
   "scripts": {
-    "start": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "start": "concurrently \"npm run start --workspace=shell\" \"npm run start --workspace=header\" \"npm run start --workspace=cards\" \"npm run start --workspace=footer\"",
+    "test": "npm test --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
