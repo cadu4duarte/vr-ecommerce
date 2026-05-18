@@ -1,12 +1,11 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { ModuleFederationPlugin } = require('webpack').container
-const deps = require('./package.json').dependencies // Importa dependências para garantir versões iguais
+const deps = require('./package.json').dependencies 
 
 module.exports = {
   mode: 'development',
 
-  // Ajuda no carregamento inicial do Module Federation
   experiments: {
     asyncStartup: true
   },
@@ -74,9 +73,9 @@ module.exports = {
   ],
 
   devServer: {
-    port: 3000, // O Shell agora roda na 3000
+    port: 3000, 
     open: true,
-    historyApiFallback: true, // Importante para rotas React funcionarem
+    historyApiFallback: true, 
     headers: {
       'Access-Control-Allow-Origin': '*'
     }

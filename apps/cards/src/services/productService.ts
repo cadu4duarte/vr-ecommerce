@@ -1,8 +1,6 @@
-import { CartItem } from '../../../shared/types/CartItem';
 
 const BASE_URL = 'https://dummyjson.com';
 
-// Interface para o que a API DummyJSON retorna
 export interface ProductDTO {
   id: number;
   title: string;
@@ -29,7 +27,6 @@ export const productService = {
     }
   },
 
-  // Você já pode deixar preparado caso precise de um produto específico
   async getProductById(id: number): Promise<ProductDTO> {
     const response = await fetch(`${BASE_URL}/products/${id}`);
     return response.json();

@@ -43,10 +43,10 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'cards', // O nome deve ser 'cards' para o Shell encontrar
+      name: 'cards', 
       filename: 'remoteEntry.js',
       exposes: {
-        // Isso permite que o Shell faça: import('cards/Cards')
+        
         './Cards': './src/App' 
       },
       shared: {
@@ -72,11 +72,11 @@ module.exports = {
   ],
 
   devServer: {
-    port: 3002, // O Cards deve rodar na 3002
+    port: 3002, 
     open: true,
     historyApiFallback: true,
     headers: {
-      'Access-Control-Allow-Origin': '*' // Necessário para o Shell conseguir baixar os arquivos
+      'Access-Control-Allow-Origin': '*' 
     }
   }
 }

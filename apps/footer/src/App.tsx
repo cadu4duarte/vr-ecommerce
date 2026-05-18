@@ -7,7 +7,6 @@ const Footer = () => {
     <footer className="bg-[#F2F2F2] border-t border-gray-200 h-[116px] py-10 px-6 mt-20">
       <div className="max-w-[1240px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         
-        {/* Logo e Copyright */}
         <div className="flex items-center gap-4">
           <img 
             src={logo} 
@@ -19,7 +18,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Links simples (Opcional para preencher o layout) */}
         <div className="flex gap-8 text-xs font-bold text-gray-400 uppercase tracking-widest">
           <a href="#" className="hover:text-[#02D72F]">Termos de uso</a>
           <a href="#" className="hover:text-[#02D72F]">Privacidade</a>

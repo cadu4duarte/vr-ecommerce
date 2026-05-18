@@ -10,7 +10,6 @@ if (!container) {
   throw new Error('Root container not found')
 }
 
-// ✅ Mock apenas para rodar o Header isolado
 const mockItems: CartItem[] = []
 
 const root = createRoot(container)

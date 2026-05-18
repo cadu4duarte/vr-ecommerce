@@ -18,7 +18,6 @@ export function CartModal({
 }: CartModalProps) {
   if (!isOpen) return null
 
-  // Agrupa os itens pelo ID e adiciona a propriedade quantity
   const groupedItems = items.reduce((acc, item) => {
     const found = acc.find((i) => i.id === item.id);
     if (found) {
@@ -85,7 +84,6 @@ export function CartModal({
             </div>
           ) : (
             <div className="space-y-4">
-              {/* ALTERADO: Agora mapeamos os itens agrupados */}
               {groupedItems.map((item) => (
                 <div
                   key={item.id}
@@ -99,7 +97,6 @@ export function CartModal({
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-gray-100 rounded overflow-hidden border border-gray-100 flex-shrink-0 relative">
-                      {/* Badge de quantidade sobre a imagem */}
                       {item.quantity > 1 && (
                         <span className="absolute top-0 right-0 bg-[#02D72F] text-white text-[10px] font-bold px-1 rounded-bl-md z-10">
                           {item.quantity}x
@@ -133,7 +130,6 @@ export function CartModal({
                     <span className="font-['Montserrat'] text-[16px] font-bold text-[#1C1C1C]">
                       {(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                     </span>
-                    {/* Mostra o valor unitário se houver repetição */}
                     {item.quantity > 1 && (
                       <span className="text-[10px] text-gray-400 italic">
                         {item.quantity}x {item.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}

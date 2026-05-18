@@ -47,10 +47,10 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'header', // Nome que o Shell usará para identificar este remoto
+      name: 'header', 
       filename: 'remoteEntry.js',
       exposes: {
-        // Isso permite que o Shell faça: import('header/Header')
+        
         './Header': './src/App'
       },
       shared: {
@@ -76,11 +76,11 @@ module.exports = {
   ],
 
   devServer: {
-    port: 3001, // O Header deve rodar na porta 3001
+    port: 3001, 
     open: true,
     historyApiFallback: true,
     headers: {
-      'Access-Control-Allow-Origin': '*' // Crucial para o Shell conseguir ler este micro-frontend
+      'Access-Control-Allow-Origin': '*' 
     }
   }
 }

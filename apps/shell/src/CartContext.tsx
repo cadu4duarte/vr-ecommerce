@@ -25,10 +25,8 @@ const STORAGE_KEY = 'vr-ecommerce-cart'
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  // Estado para controlar a notificação (popup)
   const [notification, setNotification] = useState<string | null>(null)
 
-  // ✅ Inicializa o estado a partir do localStorage
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY)
@@ -38,7 +36,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   })
 
-  // ✅ Persiste no localStorage sempre que o carrinho mudar
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
   }, [items])
@@ -46,7 +43,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   function addToCart(item: CartItem) {
     setItems(prev => [...prev, item])
 
-    // ✅ Lógica do Popup: Define o nome do item e remove após 3 segundos
     setNotification(item.name)
     setTimeout(() => {
       setNotification(null)
@@ -67,7 +63,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     >
       {children}
 
-      {/* ✅ COMPONENTE DO POPUP (TOAST) */}
       {notification && (
         <div 
           className="fixed bottom-8 right-8 z-[9999] animate-in fade-in slide-in-from-bottom-5 duration-300"

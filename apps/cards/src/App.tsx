@@ -29,10 +29,8 @@ function Cards({ onAddToCart }: CardsProps) {
       {products.map((product) => (
         <div
           key={product.id}
-          // ALTERAÇÃO: de w-[396px] para w-full max-w-[396px]
           className="w-full max-w-[396px] h-[410px] bg-white border border-gray-200 rounded-[20px] shadow-sm flex flex-col items-center pt-8 pb-6 px-4 sm:px-6"
         >
-          {/* IMAGEM: de w-[331px] para w-full max-w-[331px] */}
           <div className="w-full max-w-[331px] h-[188px] bg-[#F2F2F2] rounded-lg overflow-hidden flex items-center justify-center p-4">
             <img src={product.thumbnail} alt={product.title} className="max-w-full max-h-full object-contain" />
           </div>
@@ -42,7 +40,6 @@ function Cards({ onAddToCart }: CardsProps) {
               {product.title}
             </h3>
 
-            {/* DESCRIÇÃO: de w-[324px] para w-full max-w-[324px] */}
             <div className="mt-[13px] w-full max-w-[324px] h-[106px]">
               <p className="text-[12px] text-[#515151] text-center leading-[16px] line-clamp-4">
                 {product.description}
