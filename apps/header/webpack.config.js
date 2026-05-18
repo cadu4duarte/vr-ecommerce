@@ -37,6 +37,10 @@ module.exports = {
           'css-loader',
           'postcss-loader'
         ]
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       }
     ]
   },
@@ -47,7 +51,7 @@ module.exports = {
       filename: 'remoteEntry.js',
       exposes: {
         // Isso permite que o Shell faça: import('header/Header')
-        './Header': './src/App' 
+        './Header': './src/App'
       },
       shared: {
         ...deps,

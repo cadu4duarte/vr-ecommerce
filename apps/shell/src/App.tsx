@@ -3,6 +3,7 @@ import { useCart } from './CartContext'
 
 const Header = lazy(() => import('header/Header'))
 const Cards = lazy(() => import('cards/Cards'))
+const Footer = lazy(() => import('footer/Footer'))
 
 function CardsWithCart() {
   const { addToCart } = useCart()
@@ -32,6 +33,10 @@ function App() {
           <CardsWithCart />
         </Suspense>
       </main>
+
+      <Suspense fallback={<div className="h-20 bg-gray-100 animate-pulse" />}>
+        <Footer />
+      </Suspense>
     </>
   )
 }

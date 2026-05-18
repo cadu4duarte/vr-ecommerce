@@ -46,10 +46,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'shell',
       filename: 'remoteEntry.js',
-      // Aqui o Shell mapeia onde os micro-frontends estão rodando
       remotes: {
         header: 'header@http://localhost:3001/remoteEntry.js',
         cards: 'cards@http://localhost:3002/remoteEntry.js',
+        footer: 'footer@http://localhost:3003/remoteEntry.js',
       },
       shared: {
         ...deps,

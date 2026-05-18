@@ -16,3 +16,12 @@ body {
 .font-montserrat {
   font-family: 'Montserrat', sans-serif;
 }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-bounce-in {
+  animation: slideIn 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}

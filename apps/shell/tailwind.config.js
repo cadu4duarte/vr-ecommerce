@@ -3,8 +3,9 @@
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
-    "../header/src/**/*.{js,ts,jsx,tsx}", // Adicione isso
-    "../cards/src/**/*.{js,ts,jsx,tsx}",  // Adicione isso
+    "../header/src/**/*.{js,ts,jsx,tsx}", 
+    "../cards/src/**/*.{js,ts,jsx,tsx}",  
+    "../footer/src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: { extend: {} },
   plugins: [],

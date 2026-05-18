@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { productService, ProductDTO } from './services/productService'
-
-type CardItem = {
-  id: number
-  name: string
-  price: number
-  thumbnail?: string
-}
+import { CartItem } from '../../shared/types/CartItem'
 
 type CardsProps = {
-  onAddToCart?: (item: CardItem) => void
+  onAddToCart?: (item: CartItem) => void
 }
 
 function Cards({ onAddToCart }: CardsProps) {

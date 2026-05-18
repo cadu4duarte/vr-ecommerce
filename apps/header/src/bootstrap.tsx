@@ -1,7 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import Header from './App'
-import { CartItem } from './types/CartItem'
+import { CartItem } from '../../shared/types/CartItem'
 import './styles/index.css'
 
 const container = document.getElementById('root')

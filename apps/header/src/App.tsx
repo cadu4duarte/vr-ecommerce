@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { CartButton } from './components/CartButton'
 import { CartModal } from './components/CartModal'
-import { CartItem } from './types/CartItem'
+import { CartItem } from '../../shared/types/CartItem'
+import logo from '../../shared/assets/logo-header.svg'
 
 type HeaderProps = {
   items: CartItem[]
@@ -14,11 +15,15 @@ function Header({ items, onRemove, onClear }: HeaderProps) {
 
   return (
     <>
-      <header className="bg-[#02D72F] text-white px-6 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-semibold">
-          VR E-commerce
-        </h1>
+      <header className="bg-[#02D72F] px-8 h-16 flex justify-between items-center">
 
+        <button>
+          <img 
+            src={logo} 
+            alt="VR Logo" 
+            className="w-8 h-8" 
+          />
+        </button>
         <CartButton
           count={items.length}
           onClick={() => setIsOpen(true)}

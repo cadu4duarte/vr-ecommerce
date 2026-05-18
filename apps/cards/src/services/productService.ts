@@ -1,4 +1,4 @@
-import { CartItem } from '../types/CartItem';
+import { CartItem } from '../../../shared/types/CartItem';
 
 const BASE_URL = 'https://dummyjson.com';
 

@@ -1,5 +1,4 @@
-import React from 'react'
-import { CartItem as Item } from '../types/CartItem'
+import { CartItem as Item } from '../../../shared/types/CartItem'
 import { createPortal } from 'react-dom'
 
 type CartModalProps = {
